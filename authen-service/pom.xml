@@ -23,6 +23,7 @@
         <grpc-spring-boot-starter.version>3.0.0</grpc-spring-boot-starter.version>
         <os-maven-plugin.version>1.6.1</os-maven-plugin.version>
         <protobuf-maven-plugin.version>0.6.1</protobuf-maven-plugin.version>
+        <powermock.version>2.0.0</powermock.version>
     </properties>
 
     <dependencies>
@@ -86,6 +87,20 @@
             <groupId>io.github.lognet</groupId>
             <artifactId>grpc-spring-boot-starter</artifactId>
             <version>${grpc-spring-boot-starter.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.powermock</groupId>
+            <artifactId>powermock-module-junit4</artifactId>
+            <version>${powermock.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Mockito 2 -->
+        <dependency>
+            <groupId>org.powermock</groupId>
+            <artifactId>powermock-api-mockito2</artifactId>
+            <version>${powermock.version}</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 
