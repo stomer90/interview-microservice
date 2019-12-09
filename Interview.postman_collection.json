@@ -1,0 +1,118 @@
+{
+	"info": {
+		"_postman_id": "70b033e2-fa10-4a5b-8677-0a5b21a2601a",
+		"name": "Interview",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "SignUp",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"Nguyen Van Phong\",\n\t\"username\": \"phongnv\",\n\t\"phoneNumber\": \"+84979647693\",\n\t\"password\": \"123456\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8891/authen-service/api/v1/auth/signup",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8891",
+					"path": [
+						"authen-service",
+						"api",
+						"v1",
+						"auth",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SignIn",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3e90e8b4-25f8-4da9-a218-fcb611f0a0e5",
+						"exec": [
+							"pm.environment.set('token', JSON.parse(responseBody).token);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\": \"phongnv\",\n\t\"password\": \"123456\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8891/authen-service/api/v1/auth/signin",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8891",
+					"path": [
+						"authen-service",
+						"api",
+						"v1",
+						"auth",
+						"signin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetUserProfile",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8891/authen-service/api/v1/users/phongnv",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8891",
+					"path": [
+						"authen-service",
+						"api",
+						"v1",
+						"users",
+						"phongnv"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
