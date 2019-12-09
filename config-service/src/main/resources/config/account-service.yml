@@ -1,0 +1,43 @@
+spring:
+  profiles: development
+  datasource:
+    initialize: true
+    url: jdbc:postgresql://localhost:5432/interview
+    username: postgres
+    password: Abc@1234
+  jpa:
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        temp:
+          use_jdbc_metadata_defaults: false
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: interview_db
+---
+spring:
+  profiles: docker
+  datasource:
+    initialize: true
+    url: jdbc:postgresql://postgresdb:5432/interview_docker
+    username: postgres
+    password: pwd0123456789
+    jpa:
+      generate-ddl: true
+      hibernate:
+        ddl-auto: update
+      properties:
+        hibernate:
+          dialect: org.hibernate.dialect.PostgreSQLDialect
+          temp:
+            use_jdbc_metadata_defaults: false
+  data:
+    mongodb:
+      host: mongodb
+      port: 27017
+      database: interview_db

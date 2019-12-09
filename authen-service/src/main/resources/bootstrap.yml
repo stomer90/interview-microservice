@@ -1,0 +1,30 @@
+spring:
+  application:
+    name: authen-service
+  profiles:
+    active: development
+  cloud:
+    config:
+      uri: http://localhost:8888
+server:
+  port: 8891
+  servlet:
+    context-path: /authen-service
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: DEBUG
+---
+spring:
+  profiles: docker
+  cloud:
+    config:
+      uri: http://${CONFIG_SERVICE_HOST}:8888
+      password: C0nfig$ervice123
+      username: config-client
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: DEBUG

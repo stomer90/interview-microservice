@@ -1,0 +1,75 @@
+version: "3.5"
+
+services:
+  postgresdb:
+    image: postgres:latest
+    container_name: my_postgres
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=pwd0123456789
+      - POSTGRES_DB=interview
+    ports:
+      - 5432:5432
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data
+    networks:
+      - demo-network
+
+  mongodb:
+    image: mongo:latest
+    container_name: my-mongo
+    ports:
+      - 27017:27017
+    volumes:
+      - ./mongo-data:/var/lib/mongodb/data
+    networks:
+      - demo-network
+
+  config-service:
+    image: config-service-image:latest
+    container_name: config-service
+    build: ./config-service
+    ports:
+      - 8888:8888
+    networks:
+      - demo-network
+  authen-service:
+    image: authen-service-image:latest
+    container_name: authen-service
+    build: ./authen-service
+    ports:
+      - 8891:8891
+    links:
+      - postgresdb
+      - mongodb
+      - config-service
+    depends_on:
+      - postgresdb
+      - mongodb
+      - config-service
+    environment:
+      - CONFIG_SERVICE_HOST=config-service
+    networks:
+      - demo-network
+  account-service:
+    image: account-service-image:latest
+    container_name: account-service
+    build: ./account-service
+    ports:
+      - 8892:8892
+    links:
+      - postgresdb
+      - mongodb
+      - config-service
+    depends_on:
+      - postgresdb
+      - mongodb
+      - config-service
+    environment:
+      - CONFIG_SERVICE_HOST=config-service
+    networks:
+      - demo-network
+
+networks:
+  demo-network:
+    driver: bridge

@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: account-service
+  profiles:
+    active: development
+server:
+  port: 8892
+  servlet:
+    context-path: /account-service
+---
+spring:
+  profiles: docker
+  cloud:
+    config:
+      uri: http://${CONFIG_SERVICE_HOST}:8888
+      password: C0nfig$ervice123
+      username: config-client
