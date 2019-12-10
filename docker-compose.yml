@@ -7,7 +7,7 @@ services:
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=pwd0123456789
-      - POSTGRES_DB=interview
+      - POSTGRES_DB=interview_db
     ports:
       - 5432:5432
     volumes:
